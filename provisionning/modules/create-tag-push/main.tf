@@ -12,7 +12,7 @@ provider "docker" {
   registry_auth {
     address  = "registry-1.docker.io"
     username = "robertolandry"
-    password = "dckr_pat_igHnqeM2jfKTIfZvf06bTDOmOt0"
+    password = ""
   }
 
 }
