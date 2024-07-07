@@ -1,0 +1,4 @@
+provisionning/.terraform
+provisionning/.terraform.lock.hcl
+provisionning/terraform.tfstate
+provisionning/terraform.tfstate.backup

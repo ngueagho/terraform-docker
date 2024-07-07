@@ -12,16 +12,16 @@ provider "docker" {
 }
 
 resource "docker_image" "tech-workstation" {
-  name = "tech-workstation"
+  name = var.container_info.name
   build {
-    context = "."  # Utilisez le chemin absolu
-    dockerfile = "Dockerfile"
-    tag     = ["tech-workstation:latest"]
+    context = var.container_info.context # Utilisez le chemin absolu
+    dockerfile = var.container_info.dockerfile
+    tag     = var.container_info.tag
     build_arg = {
-      foo = "tech-workstation "
+      foo = var.container_info.foo
     }
     label = {
-      author = "[ROBERTO LANDRY]"
+      author = var.container_info.author
     }
   }
 }
