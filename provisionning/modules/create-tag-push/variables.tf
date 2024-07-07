@@ -31,12 +31,3 @@ variable "image_name" {
   default     = "registry-1.docker.io"
 }
 
-variable "docker_registry_username" {
-  description = "Nom d'utilisateur pour le registre Docker"
-  type        = string
-}
-
-variable "docker_registry_password" {
-  description = "Mot de passe pour le registre Docker"
-  type        = string
-}

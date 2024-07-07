@@ -2,3 +2,4 @@ provisionning/.terraform
 provisionning/.terraform.lock.hcl
 provisionning/terraform.tfstate
 provisionning/terraform.tfstate.backup
+provisionning/.terraform.tfstate.lock.info
