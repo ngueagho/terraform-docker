@@ -1,0 +1,22 @@
+---
+- name: Configuration du Serveur DNS
+  hosts: all
+  become: yes
+  tasks:
+    - name: configurez /etc/resolv.conf pour utiliser 8.8.8.8 comme serveur DNS
+      ansible.builtin.copy:
+        content: |
+          nameserver 8.8.8.8
+          options ndots:0
+        dest: /etc/resolv.conf
+        owner: root
+        group: root
+        backup: yes 
+        remote_src: yes
+        unsafe_writes: yes
+
+        
+
+
+
+
