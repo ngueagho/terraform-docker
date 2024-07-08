@@ -18,12 +18,20 @@ module "image" {
 
 module "container" {
     source = "./modules/container"
+    image_name= module.image.image_name
+    image_infos = module.image.image_infos
+    network_name = module.network.network_name
+
 }
 
 module "create-tag-push" {
   source = "./modules/create-tag-push"
   image_id = module.image.image_id
   image_name= module.image.image_name
+}
+
+module "network" {
+  source = "./modules/network"
 }
   
 

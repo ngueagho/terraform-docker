@@ -1,6 +1,11 @@
 # FROM robertolandry/docker-in-docker:latest
 # RUN  apt update 
 
+
+# Créez un fichier Dockerfile pour construire une image Docker basée sur
+# Ubuntu.
+
+
 FROM robertolandry/ubuntu
 RUN  apt update && apt install openssh-server -y    
 
@@ -61,11 +66,6 @@ RUN cat /home/roberto/.ssh/authorized_keys
 RUN sudo  apt install docker.io -y
 
 
-RUN su - ${USER}
-
-RUN groups
-
-RUN sudo  usermod -aG docker roberto
 
 
 
@@ -73,10 +73,10 @@ RUN sudo  usermod -aG docker roberto
 
 
 
+# Ajoutez les instructions pour installer les outils réseau nécessaires :
+# iputils-ping, dnsutils, net-tools, iftop, tcpdump, ufw,
+# openssh-client, iperf3, nmap, netcat, curl, vim, sudo.
 
-
-
-# Install essential packages
 RUN apt-get update && apt-get install -y \
     iputils-ping \
     dnsutils \
@@ -93,12 +93,24 @@ RUN apt-get update && apt-get install -y \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
+
+
+
+# Créez un utilisateur non-root techuser avec les privilèges sudo.
 RUN sudo groupadd techuser_group
 RUN useradd -m techuser 
 RUN usermod -s /bin/bash techuser 
 RUN usermod -aG sudo techuser
 RUN usermod -aG techuser_group roberto
 RUN passwd -d techuser
+
+
+
+RUN su - ${USER}
+
+RUN groups
+
+RUN sudo  usermod -aG docker roberto
 
 
 
@@ -110,21 +122,24 @@ RUN passwd -d techuser
 
 
 
+# RUN sudo systemctl start ufw
+
+
+# Configurez UFW pour autoriser les connexions SSH.
+RUN sudo ufw allow ssh 
+
+RUN sudo ufw allow 22/tcp
+
+# partie test
 RUN sudo ufw deny from 192.168.100.9
 
 RUN sudo ufw deny from 172.17.0.1
 
-# Configure UFW to allow SSH connections
-RUN ufw allow 22/tcp
+
+
 
 # configurez le conteneur pour utiliser techuser par défaut.
-
 USER techuser
-
-RUN sudo ufw deny ssh
-
-RUN sudo ufw deny 22
-
 
 
 # # #
@@ -158,15 +173,21 @@ RUN sudo chown techuser:techuser_group /home/techuser/.ssh/authorized_keys
 
 RUN cat /home/techuser/.ssh/authorized_keys
 
-# exposition du port d'access en ssh 
+RUN sudo systemctl start docker
+RUN sudo systemctl enable docker
+RUN sudo systemctl restart docker 
 
 
+
+
+
+# Définissez le port 22 pour SSH 
 EXPOSE 22
 
 # lancement du service ssh 
 
-# RUN service ssh start
+RUN sudo service ssh start
 
 # configuration pour un lancement automatique de ce service apres chaques demarage de conteneur 
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["sudo","/usr/sbin/sshd", "-D"]

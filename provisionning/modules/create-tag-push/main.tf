@@ -11,10 +11,9 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
   registry_auth {
     address  = "registry-1.docker.io"
-    username = "a"
-    password = "a"
+    username = ""
+    password = ""
   }
-
 }
 
 # tag the image 
@@ -24,11 +23,11 @@ resource "docker_tag" "image-tag" {
 }
 
 
-# push the image 
-resource "docker_registry_image" "image-push" {
-  name = var.target_image
+# # push the image 
+# resource "docker_registry_image" "image-push" {
+#   name = var.target_image
   
-  depends_on = [
-    docker_tag.image-tag
-  ]
-}
+#   depends_on = [
+#     docker_tag.image-tag
+#   ]
+# }
