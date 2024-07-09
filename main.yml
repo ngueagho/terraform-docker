@@ -1,0 +1,7 @@
+---
+- name: Déploiement complet
+  hosts: all
+  roles:
+    - dns
+
+
