@@ -1,0 +1,3 @@
+---
+- import_playbook: main1.yml
+- import_playbook: main2.yml

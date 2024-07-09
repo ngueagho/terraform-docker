@@ -1,0 +1,15 @@
+---
+- name: watch the network bandwidth with 
+  become: yes
+  command:  script -c  "timeout 1 tcpdump -i eth0" capture.pcap # Capturer pendant 5 secondes
+
+# le block ci dessu recupere le resultat du cat et le stocke dans une variable 
+- name: cat tcpdump results
+  command: sudo cat capture.pcap
+  register: container_tcpdump
+
+# ici on afiche le contenue de la variable
+- name: Display DNS tcpdump results
+  debug:
+    var: 
+      - container_tcpdump.stdout_lines

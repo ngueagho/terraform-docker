@@ -1,0 +1,13 @@
+---
+- name: watch the network bandwidth with iftop
+  become: yes
+  command:  script -c "timeout 1 iftop -i eth0 " iftop_output.txt
+
+# le block ci dessu recupere le resultat du cat et le stocke dans une variable 
+- name: cat iftop results
+  command: sudo cat ~/iftop_output.txt
+  register: container_iftop
+# ici on afiche le contenue de la variable
+- name: Display DNS iftop results
+  debug:
+    var: container_iftop.stdout_lines

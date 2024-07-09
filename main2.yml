@@ -1,0 +1,6 @@
+---
+- name: single executions playbooks
+  hosts: ansible_workstation1
+  become: yes
+  roles:
+    - analyse_reseau

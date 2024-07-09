@@ -1,4 +1,5 @@
 ---
+  # 1. Dans chaque conteneur, configurez /etc/resolv.conf pour utiliser 8.8.8.8 comme serveur DNS.
 - name: configure /etc/resolv.conf to use 8.8.8.8 as DNS serveur 
   ansible.builtin.copy:
     src: resolv_new.conf
