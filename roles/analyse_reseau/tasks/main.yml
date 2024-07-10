@@ -1,7 +1,7 @@
 ---
 - name: watch the network bandwidth with 
   become: yes
-  command:  script -c  "timeout 1 tcpdump -i eth0" capture.pcap # Capturer pendant 5 secondes
+  command:  script -c  "sudo timeout 5 tcpdump -i eth0" capture.pcap # Capturer pendant 5 secondes
 
 # le block ci dessu recupere le resultat du cat et le stocke dans une variable 
 - name: cat tcpdump results

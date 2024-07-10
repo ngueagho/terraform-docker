@@ -1,7 +1,8 @@
 ---
-- name: Déploiement complet/root executions playbook
-  # become: yes
-  hosts: all
+- name: single executions playbooks
+  hosts: ansible_workstation1
+  become: yes
   roles:
-    - dns
-    - surveillance_reseau
+    - analyse_reseau
+    - connexion_ssh
+    - iperf3_server

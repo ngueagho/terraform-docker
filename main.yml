@@ -1,0 +1,7 @@
+---
+- name: Déploiement complet/root executions playbook
+  # become: yes
+  hosts: all
+  roles:
+    - dns
+    - surveillance_reseau

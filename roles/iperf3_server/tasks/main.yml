@@ -1,0 +1,7 @@
+# 2-Configurez workstation1 comme serveur iperf3 et workstation2
+# comme client, puis exécutez un test de bande passante.
+---
+- name: define iperf3_server
+  become: yes
+  command:  
+

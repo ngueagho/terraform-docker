@@ -1,6 +1,6 @@
 ---
 - name: single executions playbooks
-  hosts: ansible_workstation1
+  hosts: ansible_workstation2
   become: yes
   roles:
-    - analyse_reseau
+    - iperf3_client

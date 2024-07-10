@@ -1,0 +1,21 @@
+# pour ce faire nous allons copier une  cle prive dans le dossier /home/techuser pour que de la machine  workstation1, on puisse 
+# se connecter en ssh a la machine workstation2, 
+---
+- name: Configure SSH key authentication between workstation1 and workstation2 
+  ansible.builtin.copy:
+    src: provisionning/idkey
+    dest: /home/techuser
+    owner: techuser
+    group: techuser
+    unsafe_writes: yes
+# pour tester la connectivite par ssh entre la machine  workstation1 et workstation2, nous allons creer un fichier dans workstation1
+# puis le copier dans workstation2
+- name: create file 
+  become: yes
+  command:  script -c "echo hello_from_workstation1_to_workstation2"  hello.txt
+
+- name: copy hello file 
+  become: yes
+  command:  sudo scp -i idkey  hello.txt techuser@172.20.0.12:/home/techuser
+  register: output
+  
