@@ -3,18 +3,12 @@
   become: yes
   ansible.builtin.copy:
     src: ./../server.sh
-    dest: /home/techuser/server.sh
+    dest: /home/server1.sh
     owner: techuser
     group: root
     mode: u+rwx,g-rwx,o-rwx
     unsafe_writes: yes
 
-    # la ligne ci dessu permet entre autre de supprimer les erreur de metadonnes du a la copie : comme par exemple OSError: [Errno 16] Device or resource busy:
-  # 2. Vérifiez la résolution DNS avec nslookup.
 - name: executer du script de demarage du serveur sur le port 8080
-  command: /home/techuser/server.sh &
+  shell: nohup /home/server1.sh > mon_serveur.log 2>&1 &
   register: netcat_outputs
-  
-- name: Display DNS lookup results
-  debug:
-    var: netcat_outputs.stdout_lines
