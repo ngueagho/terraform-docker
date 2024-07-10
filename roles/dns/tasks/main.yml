@@ -1,12 +1,14 @@
 ---
   # 1. Dans chaque conteneur, configurez /etc/resolv.conf pour utiliser 8.8.8.8 comme serveur DNS.
 - name: configure /etc/resolv.conf to use 8.8.8.8 as DNS serveur 
+  become: yes
   ansible.builtin.copy:
     src: resolv_new.conf
     dest: /etc/resolv.conf
     owner: root
     group: root
     unsafe_writes: yes
+
     # la ligne ci dessu permet entre autre de supprimer les erreur de metadonnes du a la copie : comme par exemple OSError: [Errno 16] Device or resource busy:
   # 2. Vérifiez la résolution DNS avec nslookup.
 - name: check DNS resolution with nslookup

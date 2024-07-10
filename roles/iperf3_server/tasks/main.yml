@@ -3,5 +3,5 @@
 ---
 - name: define iperf3_server
   become: yes
-  command:  
+  command:  sh -c "iperf3 -s -i 1 & "
 

@@ -9,4 +9,10 @@
 ---
 - name: define iperf3_client
   become: yes
-  command:  
+  command:  iperf3 -c 172.20.0.11 -t 10 -i 1
+  register: iperf3_output
+  
+- name: Display iperf3 results
+  debug:
+    var: iperf3_output.stdout_lines
+
