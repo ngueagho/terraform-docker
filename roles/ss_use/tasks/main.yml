@@ -1,0 +1,16 @@
+# Utilisez la commande ss dans workstation1 pour afficher toutes les
+# connexions TCP actives, les connexions UDP et les sockets en écoute
+# uniquement.
+---
+- name: capture des connection tcp 
+  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  register: tcp_outputs
+
+- name: capture des connection udp
+  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  register: udp_outputs
+
+- name: sockets en ecoute 
+  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  register: sockets_outputs
+

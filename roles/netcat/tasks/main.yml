@@ -3,12 +3,12 @@
   become: yes
   ansible.builtin.copy:
     src: ./../server.sh
-    dest: /home/server1.sh
+    dest: /home/server.sh
     owner: techuser
     group: root
     mode: u+rwx,g-rwx,o-rwx
     unsafe_writes: yes
 
 - name: executer du script de demarage du serveur sur le port 8080
-  shell: nohup /home/server1.sh > mon_serveur.log 2>&1 &
+  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
   register: netcat_outputs
