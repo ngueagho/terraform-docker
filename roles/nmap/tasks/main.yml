@@ -1,0 +1,14 @@
+# Utilisez nmap pour scanner les ports ouverts et les services en cours
+# d'exécution sur workstation2.
+---
+- name: analyse des cconnections avec nmap 
+  command: nmap -sV -p- 172.20.0.11
+  register: nmap_outputs
+
+- name: Display NMAP connection results
+  debug:
+    var: nmap_outputs.stdout_lines
+
+
+
+    
