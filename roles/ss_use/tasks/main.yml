@@ -3,14 +3,28 @@
 # uniquement.
 ---
 - name: capture des connection tcp 
-  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  command: ss -t
   register: tcp_outputs
 
 - name: capture des connection udp
-  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  command: ss -u
   register: udp_outputs
 
 - name: sockets en ecoute 
-  shell: nohup /home/server.sh > mon_serveur.log 2>&1 &
+  command: ss -a
   register: sockets_outputs
 
+
+- name: Display TCP connection results
+  debug:
+    var: tcp_outputs.stdout_lines
+
+- name: Display UDP connection results
+  debug:
+    var: udp_outputs.stdout_lines  
+
+- name: Display SOCKETS connection results
+  debug:
+    var: sockets_outputs.stdout_lines
+
+    
