@@ -1,0 +1,8 @@
+#Dans workstation1, ajoutez une route statique pour le réseau
+# 172.20.1.0/24 passant par la passerelle 172.20.0.1.
+
+# ---
+# - name: define the static_road on workstation1
+#   become: yes
+#   command:  sh -c "sudo -u root ip route add 172.20.1.0/24 via 172.20.0.1 dev eth0"
+
